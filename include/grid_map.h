@@ -16,9 +16,17 @@
 #define GRID_MAP_H_
 
 #include <cstdint>
+#include <climits>
 #include <vector>
 
 #include "state.h"
+
+
+constexpr int32_t kInfinity = INT32_MAX / 4;
+constexpr int32_t kCostScale = 1000;
+constexpr int32_t kStraightCost = 1000;
+constexpr int32_t kDiagonalCost = 1414;
+
 
 enum class Connectivity : uint8_t { 
     kFour = 4,
@@ -31,7 +39,7 @@ class GridMap {
         int32_t height;
         int32_t width;
         Connectivity connectivity;
-        std::vector<bool> blocked; // Blocked list
+        std::vector<uint8_t> blocked; // Blocked list
 
         int32_t toIndex(const State& state) const;
 
@@ -40,7 +48,7 @@ class GridMap {
         bool isDiagonalMove(const State& state_a, const State& state_b) const;
 
         bool isDiagonalMoveAllowed(const State& state_a, const State& state_b) const;
-        
+
     public:
         GridMap(int32_t width, int32_t height, Connectivity connectivity);
 
@@ -48,11 +56,11 @@ class GridMap {
 
         bool isBlocked(const State& state) const;
 
-        void setBlocked(const State& state, bool blocked);
+        void setBlocked(const State& state, bool is_blocked);
 
         int32_t cost(const State& state_a, const State& state_b) const;
 
-        std::vector<State>getNeighbors(const State& state) const;
+        std::vector<State> getNeighbors(const State& state) const;
 
         std::vector<State> getSucc(const State& state) const;
 
