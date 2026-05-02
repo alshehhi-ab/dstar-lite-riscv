@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['y_70',['y',['../structState.html#a37242cc8d6f28d15b02c604c9ec42874',1,'State']]]
+  ['target_20platform_0',['Target Platform',['../md_README.html#autotoc_md6',1,'']]],
+  ['theoretical_20background_1',['Theoretical Background',['../md_README.html#autotoc_md3',1,'']]]
 ];

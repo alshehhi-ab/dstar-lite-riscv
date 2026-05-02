@@ -1,19 +1,7 @@
 var searchData=
 [
-  ['g_7',['g',['../structStateValue.html#a144887f760dac089b4cf7c05d2875873',1,'StateValue']]],
-  ['getconnectivity_8',['getConnectivity',['../classGridMap.html#a615d01b5cf6ee1fc3539d30a7ec77d84',1,'GridMap']]],
-  ['getg_9',['getG',['../classDStarLite.html#ab5829effb52b12916c04258e776de632',1,'DStarLite']]],
-  ['getgoal_10',['getGoal',['../classDStarLite.html#a7ef5013a279f9e219056fc3008e17dcb',1,'DStarLite']]],
-  ['getheight_11',['getHeight',['../classGridMap.html#a6873f1f94a3d4572dd884f14ff548a5d',1,'GridMap']]],
-  ['getheuristictype_12',['getHeuristicType',['../classDStarLite.html#a967d74915b27da3401023556828da500',1,'DStarLite']]],
-  ['getneighbors_13',['getNeighbors',['../classGridMap.html#a59c8f6bbf5751d7d5364293c7a0bf161',1,'GridMap']]],
-  ['getpath_14',['getPath',['../classDStarLite.html#a1ccb2960d999214d970f9e5f633acc02',1,'DStarLite']]],
-  ['getpred_15',['getPred',['../classGridMap.html#ab91b39ab1345f709ef863b316e748917',1,'GridMap']]],
-  ['getrhs_16',['getRhs',['../classDStarLite.html#ae06dd14ea57598b0c293bc98bec7d55d',1,'DStarLite']]],
-  ['getstart_17',['getStart',['../classDStarLite.html#a02ab86942aaf38e3ce1dbac2209965be',1,'DStarLite']]],
-  ['getsucc_18',['getSucc',['../classGridMap.html#a68dab99a1413ed3d820d3d191ade415f',1,'GridMap']]],
-  ['getwidth_19',['getWidth',['../classGridMap.html#a2437ed6927ef635788433ccf245381e3',1,'GridMap']]],
-  ['grid_5fmap_2ecpp_20',['grid_map.cpp',['../grid__map_8cpp.html',1,'']]],
-  ['grid_5fmap_2eh_21',['grid_map.h',['../grid__map_8h.html',1,'']]],
-  ['gridmap_22',['GridMap',['../classGridMap.html',1,'GridMap'],['../classGridMap.html#a5f20cf18b8f5e150f64124cabecf5fa6',1,'GridMap::GridMap()']]]
+  ['d_20lite_20for_20fpgas_0',['D* Lite for FPGAs',['../md_README.html',1,'']]],
+  ['dstar_5flite_2ecpp_1',['dstar_lite.cpp',['../dstar__lite_8cpp.html',1,'']]],
+  ['dstar_5flite_2eh_2',['dstar_lite.h',['../dstar__lite_8h.html',1,'']]],
+  ['dstarlite_3',['dstarlite',['../classDStarLite.html',1,'DStarLite'],['../classDStarLite.html#af818a8292112e0d715a724e132ca2e4b',1,'DStarLite::DStarLite()']]]
 ];

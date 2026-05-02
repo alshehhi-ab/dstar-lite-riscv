@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['dstarlite_71',['DStarLite',['../classDStarLite.html',1,'']]]
+  ['dstarlite_0',['DStarLite',['../classDStarLite.html',1,'']]]
 ];

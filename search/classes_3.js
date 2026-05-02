@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['pqnode_74',['PQNode',['../structPQNode.html',1,'']]],
-  ['pqnodecompare_75',['PQNodeCompare',['../structPQNodeCompare.html',1,'']]]
+  ['pqnode_0',['PQNode',['../structPQNode.html',1,'']]],
+  ['pqnodecompare_1',['PQNodeCompare',['../structPQNodeCompare.html',1,'']]]
 ];

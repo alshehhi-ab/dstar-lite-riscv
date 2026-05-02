@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['connectivity_0',['Connectivity',['../grid__map_8h.html#a44f6b90da41b0bb3292617d50b957a3f',1,'grid_map.h']]],
-  ['cost_1',['cost',['../classGridMap.html#a117cd0e3e1975701f8187f368819738e',1,'GridMap']]]
+  ['academic_20references_0',['Academic References',['../md_README.html#autotoc_md10',1,'']]],
+  ['additional_20papers_3a_1',['Additional Papers:',['../md_README.html#autotoc_md11',1,'']]],
+  ['architecture_2',['Hardware Architecture',['../md_README.html#autotoc_md5',1,'']]],
+  ['authors_3',['Authors',['../md_README.html#autotoc_md13',1,'']]]
 ];

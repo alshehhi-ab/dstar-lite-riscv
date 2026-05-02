@@ -1,0 +1,5 @@
+<map id="DStarLite::getG" name="DStarLite::getG">
+<area shape="rect" id="Node000001" title="gets the g cost of a given state." alt="" coords="184,5,305,31"/>
+<area shape="rect" id="Node000002" href="$classDStarLite.html#a130291392b0ae83ab59d75cd52404cb2" title=" " alt="" coords="5,5,136,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="170,21,136,21,136,15,170,15"/>
+</map>
