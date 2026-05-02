@@ -26,10 +26,12 @@
 #include "grid_map.h"
 
 
+/* 
 constexpr int32_t kInfinity = INT32_MAX / 4;
 constexpr int32_t kCostScale = 1000;
 constexpr int32_t kStraightCost = 1000;
 constexpr int32_t kDiagonalCost = 1414;
+*/
 
 enum class HeuristicType : uint8_t {
     kManhattan = 0,
