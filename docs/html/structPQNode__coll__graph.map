@@ -1,0 +1,5 @@
+<map id="PQNode" name="PQNode">
+<area shape="rect" id="node1" title="Is a node within the priority queue." alt="" coords="29,95,103,121"/>
+<area shape="rect" id="node2" href="$structKey.html" title="Lexicographic key used by D*Lite Priority Queue." alt="" coords="5,5,52,32"/>
+<area shape="rect" id="node3" href="$structState.html" title="State representation of D* Lite vertex, contains the x and y indices." alt="" coords="77,5,133,32"/>
+</map>

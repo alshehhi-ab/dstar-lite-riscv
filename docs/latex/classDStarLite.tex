@@ -1,0 +1,412 @@
+\hypertarget{classDStarLite}{}\doxysection{DStar\+Lite Class Reference}
+\label{classDStarLite}\index{DStarLite@{DStarLite}}
+
+
+{\ttfamily \#include $<$dstar\+\_\+lite.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classDStarLite_af818a8292112e0d715a724e132ca2e4b}{DStar\+Lite}} (const \mbox{\hyperlink{classGridMap}{Grid\+Map}} \&grid, const \mbox{\hyperlink{dstar__lite_8h_a78acb61a598d392ecc57d80c1d792d9c}{Heuristic\+Type}} heuristic\+\_\+type=\mbox{\hyperlink{dstar__lite_8h_a78acb61a598d392ecc57d80c1d792d9cab144edd03184bb99625a8f12cd0d78ae}{Heuristic\+Type\+::k\+Manhattan}})
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{classDStarLite}{DStar\+Lite}} object. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classDStarLite_ac3432bde7f63e2006d75b7c577c6e906}{plan}} ()
+\begin{DoxyCompactList}\small\item\em the main planning and replanning loop. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structState}{State}} \mbox{\hyperlink{classDStarLite_a02ab86942aaf38e3ce1dbac2209965be}{get\+Start}} () const
+\begin{DoxyCompactList}\small\item\em Get the Start object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structState}{State}} \mbox{\hyperlink{classDStarLite_a7ef5013a279f9e219056fc3008e17dcb}{get\+Goal}} () const
+\begin{DoxyCompactList}\small\item\em Get the Goal object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classDStarLite_a9f5447e35fb140cab58cc264317423b2}{set\+Start}} (const \mbox{\hyperlink{structState}{State}} \&start)
+\begin{DoxyCompactList}\small\item\em Set the Start object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classDStarLite_a22390594fcf1049bd1edbec41970d6a6}{set\+Goal}} (const \mbox{\hyperlink{structState}{State}} \&goal)
+\begin{DoxyCompactList}\small\item\em Set the Goal object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classDStarLite_adaf418deeadbe5c78a8c05efd7813791}{update\+Start}} (const \mbox{\hyperlink{structState}{State}} \&new\+\_\+start)
+\item 
+void \mbox{\hyperlink{classDStarLite_a1825e09a2f70a6789fee288367f4bd91}{set\+Blocked}} (const \mbox{\hyperlink{structState}{State}} \&state, bool is\+\_\+blocked)
+\item 
+const std\+::vector$<$ \mbox{\hyperlink{structState}{State}} $>$ \& \mbox{\hyperlink{classDStarLite_a1ccb2960d999214d970f9e5f633acc02}{get\+Path}} () const
+\begin{DoxyCompactList}\small\item\em Get the Path of states. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classDStarLite_ac8ed9ade51beda1564d66c6d336bca67}{setG}} (const \mbox{\hyperlink{structState}{State}} \&state, int32\+\_\+t g)
+\begin{DoxyCompactList}\small\item\em set the g cost of a given state. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classDStarLite_abcdfb856f9835ae3ccf1ce871fa43783}{set\+Rhs}} (const \mbox{\hyperlink{structState}{State}} \&state, int32\+\_\+t rhs)
+\begin{DoxyCompactList}\small\item\em Set the rhs cost of a given state. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{classDStarLite_ab5829effb52b12916c04258e776de632}{getG}} (const \mbox{\hyperlink{structState}{State}} \&state) const
+\begin{DoxyCompactList}\small\item\em gets the g cost of a given state. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{classDStarLite_ae06dd14ea57598b0c293bc98bec7d55d}{get\+Rhs}} (const \mbox{\hyperlink{structState}{State}} \&state) const
+\begin{DoxyCompactList}\small\item\em gets the rhs cost of a given state. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classDStarLite_a795a678fe4c30750ac9af848ddb04ddf}{set\+Heuristic\+Type}} (\mbox{\hyperlink{dstar__lite_8h_a78acb61a598d392ecc57d80c1d792d9c}{Heuristic\+Type}} heuristic\+\_\+type)
+\begin{DoxyCompactList}\small\item\em Set the Heuristic Type of the planner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{dstar__lite_8h_a78acb61a598d392ecc57d80c1d792d9c}{Heuristic\+Type}} \mbox{\hyperlink{classDStarLite_a967d74915b27da3401023556828da500}{get\+Heuristic\+Type}} () const
+\begin{DoxyCompactList}\small\item\em Get the Heuristic Type of the planner. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classDStarLite_a130291392b0ae83ab59d75cd52404cb2}{replan}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classDStarLite_af818a8292112e0d715a724e132ca2e4b}\label{classDStarLite_af818a8292112e0d715a724e132ca2e4b}} 
+\index{DStarLite@{DStarLite}!DStarLite@{DStarLite}}
+\index{DStarLite@{DStarLite}!DStarLite@{DStarLite}}
+\doxysubsubsection{\texorpdfstring{DStarLite()}{DStarLite()}}
+{\footnotesize\ttfamily DStar\+Lite\+::\+DStar\+Lite (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classGridMap}{Grid\+Map}} \&}]{grid,  }\item[{const \mbox{\hyperlink{dstar__lite_8h_a78acb61a598d392ecc57d80c1d792d9c}{Heuristic\+Type}}}]{heuristic\+\_\+type = {\ttfamily \mbox{\hyperlink{dstar__lite_8h_a78acb61a598d392ecc57d80c1d792d9cab144edd03184bb99625a8f12cd0d78ae}{Heuristic\+Type\+::k\+Manhattan}}} }\end{DoxyParamCaption})}
+
+
+
+Construct a new \mbox{\hyperlink{classDStarLite}{DStar\+Lite}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em grid} & \\
+\hline
+{\em heuristic\+\_\+type} & (0 for Manhattan, 1 for Octile, 2 for Chebyshev) \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=341pt]{classDStarLite_af818a8292112e0d715a724e132ca2e4b_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classDStarLite_ab5829effb52b12916c04258e776de632}\label{classDStarLite_ab5829effb52b12916c04258e776de632}} 
+\index{DStarLite@{DStarLite}!getG@{getG}}
+\index{getG@{getG}!DStarLite@{DStarLite}}
+\doxysubsubsection{\texorpdfstring{getG()}{getG()}}
+{\footnotesize\ttfamily int32\+\_\+t DStar\+Lite\+::getG (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structState}{State}} \&}]{state }\end{DoxyParamCaption}) const}
+
+
+
+gets the g cost of a given state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int32\+\_\+t 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=303pt]{classDStarLite_ab5829effb52b12916c04258e776de632_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDStarLite_ab5829effb52b12916c04258e776de632_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classDStarLite_a7ef5013a279f9e219056fc3008e17dcb}\label{classDStarLite_a7ef5013a279f9e219056fc3008e17dcb}} 
+\index{DStarLite@{DStarLite}!getGoal@{getGoal}}
+\index{getGoal@{getGoal}!DStarLite@{DStarLite}}
+\doxysubsubsection{\texorpdfstring{getGoal()}{getGoal()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structState}{State}} DStar\+Lite\+::get\+Goal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the Goal object. 
+
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{structState}{State}} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classDStarLite_a967d74915b27da3401023556828da500}\label{classDStarLite_a967d74915b27da3401023556828da500}} 
+\index{DStarLite@{DStarLite}!getHeuristicType@{getHeuristicType}}
+\index{getHeuristicType@{getHeuristicType}!DStarLite@{DStarLite}}
+\doxysubsubsection{\texorpdfstring{getHeuristicType()}{getHeuristicType()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{dstar__lite_8h_a78acb61a598d392ecc57d80c1d792d9c}{Heuristic\+Type}} DStar\+Lite\+::get\+Heuristic\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the Heuristic Type of the planner. 
+
+\begin{DoxyReturn}{Returns}
+Heuristic\+Type 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classDStarLite_a1ccb2960d999214d970f9e5f633acc02}\label{classDStarLite_a1ccb2960d999214d970f9e5f633acc02}} 
+\index{DStarLite@{DStarLite}!getPath@{getPath}}
+\index{getPath@{getPath}!DStarLite@{DStarLite}}
+\doxysubsubsection{\texorpdfstring{getPath()}{getPath()}}
+{\footnotesize\ttfamily const std\+::vector$<$ \mbox{\hyperlink{structState}{State}} $>$ \& DStar\+Lite\+::get\+Path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the Path of states. 
+
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$\+State$>$ 
+\end{DoxyReturn}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDStarLite_a1ccb2960d999214d970f9e5f633acc02_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classDStarLite_ae06dd14ea57598b0c293bc98bec7d55d}\label{classDStarLite_ae06dd14ea57598b0c293bc98bec7d55d}} 
+\index{DStarLite@{DStarLite}!getRhs@{getRhs}}
+\index{getRhs@{getRhs}!DStarLite@{DStarLite}}
+\doxysubsubsection{\texorpdfstring{getRhs()}{getRhs()}}
+{\footnotesize\ttfamily int32\+\_\+t DStar\+Lite\+::get\+Rhs (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structState}{State}} \&}]{state }\end{DoxyParamCaption}) const}
+
+
+
+gets the rhs cost of a given state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int32\+\_\+t 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=313pt]{classDStarLite_ae06dd14ea57598b0c293bc98bec7d55d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classDStarLite_a02ab86942aaf38e3ce1dbac2209965be}\label{classDStarLite_a02ab86942aaf38e3ce1dbac2209965be}} 
+\index{DStarLite@{DStarLite}!getStart@{getStart}}
+\index{getStart@{getStart}!DStarLite@{DStarLite}}
+\doxysubsubsection{\texorpdfstring{getStart()}{getStart()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structState}{State}} DStar\+Lite\+::get\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the Start object. 
+
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{structState}{State}} 
+\end{DoxyReturn}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDStarLite_a02ab86942aaf38e3ce1dbac2209965be_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classDStarLite_ac3432bde7f63e2006d75b7c577c6e906}\label{classDStarLite_ac3432bde7f63e2006d75b7c577c6e906}} 
+\index{DStarLite@{DStarLite}!plan@{plan}}
+\index{plan@{plan}!DStarLite@{DStarLite}}
+\doxysubsubsection{\texorpdfstring{plan()}{plan()}}
+{\footnotesize\ttfamily bool DStar\+Lite\+::plan (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+the main planning and replanning loop. 
+
+\begin{DoxyReturn}{Returns}
+bool true if planning successful, false if no plan exists. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDStarLite_ac3432bde7f63e2006d75b7c577c6e906_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=246pt]{classDStarLite_ac3432bde7f63e2006d75b7c577c6e906_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classDStarLite_a130291392b0ae83ab59d75cd52404cb2}\label{classDStarLite_a130291392b0ae83ab59d75cd52404cb2}} 
+\index{DStarLite@{DStarLite}!replan@{replan}}
+\index{replan@{replan}!DStarLite@{DStarLite}}
+\doxysubsubsection{\texorpdfstring{replan()}{replan()}}
+{\footnotesize\ttfamily bool DStar\+Lite\+::replan (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDStarLite_a130291392b0ae83ab59d75cd52404cb2_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=255pt]{classDStarLite_a130291392b0ae83ab59d75cd52404cb2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classDStarLite_a1825e09a2f70a6789fee288367f4bd91}\label{classDStarLite_a1825e09a2f70a6789fee288367f4bd91}} 
+\index{DStarLite@{DStarLite}!setBlocked@{setBlocked}}
+\index{setBlocked@{setBlocked}!DStarLite@{DStarLite}}
+\doxysubsubsection{\texorpdfstring{setBlocked()}{setBlocked()}}
+{\footnotesize\ttfamily void DStar\+Lite\+::set\+Blocked (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structState}{State}} \&}]{state,  }\item[{bool}]{is\+\_\+blocked }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDStarLite_a1825e09a2f70a6789fee288367f4bd91_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=278pt]{classDStarLite_a1825e09a2f70a6789fee288367f4bd91_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classDStarLite_ac8ed9ade51beda1564d66c6d336bca67}\label{classDStarLite_ac8ed9ade51beda1564d66c6d336bca67}} 
+\index{DStarLite@{DStarLite}!setG@{setG}}
+\index{setG@{setG}!DStarLite@{DStarLite}}
+\doxysubsubsection{\texorpdfstring{setG()}{setG()}}
+{\footnotesize\ttfamily void DStar\+Lite\+::setG (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structState}{State}} \&}]{state,  }\item[{int32\+\_\+t}]{g }\end{DoxyParamCaption})}
+
+
+
+set the g cost of a given state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & \\
+\hline
+{\em g} & \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=302pt]{classDStarLite_ac8ed9ade51beda1564d66c6d336bca67_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classDStarLite_a22390594fcf1049bd1edbec41970d6a6}\label{classDStarLite_a22390594fcf1049bd1edbec41970d6a6}} 
+\index{DStarLite@{DStarLite}!setGoal@{setGoal}}
+\index{setGoal@{setGoal}!DStarLite@{DStarLite}}
+\doxysubsubsection{\texorpdfstring{setGoal()}{setGoal()}}
+{\footnotesize\ttfamily void DStar\+Lite\+::set\+Goal (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structState}{State}} \&}]{goal }\end{DoxyParamCaption})}
+
+
+
+Set the Goal object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em goal} & \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=262pt]{classDStarLite_a22390594fcf1049bd1edbec41970d6a6_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classDStarLite_a795a678fe4c30750ac9af848ddb04ddf}\label{classDStarLite_a795a678fe4c30750ac9af848ddb04ddf}} 
+\index{DStarLite@{DStarLite}!setHeuristicType@{setHeuristicType}}
+\index{setHeuristicType@{setHeuristicType}!DStarLite@{DStarLite}}
+\doxysubsubsection{\texorpdfstring{setHeuristicType()}{setHeuristicType()}}
+{\footnotesize\ttfamily void DStar\+Lite\+::set\+Heuristic\+Type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{dstar__lite_8h_a78acb61a598d392ecc57d80c1d792d9c}{Heuristic\+Type}}}]{heuristic\+\_\+type }\end{DoxyParamCaption})}
+
+
+
+Set the Heuristic Type of the planner. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em heuristic\+\_\+type} & (0 for manhattan, 1 for octile, 2 for Chebyshev) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classDStarLite_abcdfb856f9835ae3ccf1ce871fa43783}\label{classDStarLite_abcdfb856f9835ae3ccf1ce871fa43783}} 
+\index{DStarLite@{DStarLite}!setRhs@{setRhs}}
+\index{setRhs@{setRhs}!DStarLite@{DStarLite}}
+\doxysubsubsection{\texorpdfstring{setRhs()}{setRhs()}}
+{\footnotesize\ttfamily void DStar\+Lite\+::set\+Rhs (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structState}{State}} \&}]{state,  }\item[{int32\+\_\+t}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Set the rhs cost of a given state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & \\
+\hline
+{\em rhs} & \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=313pt]{classDStarLite_abcdfb856f9835ae3ccf1ce871fa43783_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classDStarLite_a9f5447e35fb140cab58cc264317423b2}\label{classDStarLite_a9f5447e35fb140cab58cc264317423b2}} 
+\index{DStarLite@{DStarLite}!setStart@{setStart}}
+\index{setStart@{setStart}!DStarLite@{DStarLite}}
+\doxysubsubsection{\texorpdfstring{setStart()}{setStart()}}
+{\footnotesize\ttfamily void DStar\+Lite\+::set\+Start (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structState}{State}} \&}]{start }\end{DoxyParamCaption})}
+
+
+
+Set the Start object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start} & \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=263pt]{classDStarLite_a9f5447e35fb140cab58cc264317423b2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classDStarLite_adaf418deeadbe5c78a8c05efd7813791}\label{classDStarLite_adaf418deeadbe5c78a8c05efd7813791}} 
+\index{DStarLite@{DStarLite}!updateStart@{updateStart}}
+\index{updateStart@{updateStart}!DStarLite@{DStarLite}}
+\doxysubsubsection{\texorpdfstring{updateStart()}{updateStart()}}
+{\footnotesize\ttfamily void DStar\+Lite\+::update\+Start (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structState}{State}} \&}]{new\+\_\+start }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDStarLite_adaf418deeadbe5c78a8c05efd7813791_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=282pt]{classDStarLite_adaf418deeadbe5c78a8c05efd7813791_icgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{dstar__lite_8h}{dstar\+\_\+lite.\+h}}\item 
+src/\mbox{\hyperlink{dstar__lite_8cpp}{dstar\+\_\+lite.\+cpp}}\end{DoxyCompactItemize}

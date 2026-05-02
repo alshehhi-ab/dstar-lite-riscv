@@ -1,0 +1,106 @@
+ \href{https://opensource.org/licenses/Apache-2.0}{\texttt{ }}  
+
+This repository contains a high-\/performance implementation of the {\bfseries{D$\ast$ Lite}} path-\/planning algorithm, specifically optimised for {\bfseries{RV32\+I/\+IMC}} RISC-\/V soft-\/cores running on {\bfseries{FPGA}} hardware.\hypertarget{md_README_autotoc_md1}{}\doxysection{Overview}\label{md_README_autotoc_md1}
+Dynamic path planning is a fundamental yet computationally expensive task in autonomous robotics. This project addresses these bottlenecks through a hardware-\/software co-\/design approach, implementing D$\ast$ Lite in C++ for resource-\/constrained environments. By utilising fixed-\/point arithmetic and custom ISA extensions, this implementation achieves the low-\/latency response required for real-\/time navigation.\hypertarget{md_README_autotoc_md2}{}\doxysection{Repository Structure \& Branches}\label{md_README_autotoc_md2}
+This project is divided into branches based on the level of hardware integration\+:
+
+
+\begin{DoxyItemize}
+\item $\ast$$\ast${\ttfamily main}$\ast$$\ast$\+: The core C++ implementation of D$\ast$ Lite using purely fixed-\/point integer arithmetic. This branch is target-\/agnostic for RISC-\/V IMC cores.
+\item $\ast$$\ast${\ttfamily feature/hw-\/accel}$\ast$$\ast$\+: Contains the code optimised for {\bfseries{RV32\+IMC extensions}}. This branch includes the specialised assembly/intrinsics required to interface with custom FPGA hardware logic for priority queue acceleration.
+\item $\ast$$\ast${\ttfamily research/profiling}$\ast$$\ast$\+: Dedicated to performance analysis, containing scripts and benchmarks used to evaluate the speedup of the hardware-\/accelerated version versus the software-\/only baseline.
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md3}{}\doxysection{Theoretical Background}\label{md_README_autotoc_md3}
+The {\bfseries{D$\ast$ Lite}} algorithm, developed by {\bfseries{Sven Koenig}} and {\bfseries{Maxim Likhachev}}, is an incremental heuristic search method. Unlike static planners, D$\ast$ Lite efficiently repairs previous search results when obstacles are detected, avoiding the need to plan from scratch.\hypertarget{md_README_autotoc_md4}{}\doxysubsection{Key Features}\label{md_README_autotoc_md4}
+
+\begin{DoxyItemize}
+\item {\bfseries{Incremental Replanning}}\+: Handles dynamic world changes efficiently.
+\item {\bfseries{Fixed-\/\+Point Arithmetic}}\+: Pure Fixed-\/\+Point implementation of the D$\ast$ Lite alorithm, reducing the need for floating-\/point hardware support.
+\item {\bfseries{Configurable Heuristics}}\+: Supports Manhattan, Octile, and Chebyshev distances.
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md5}{}\doxysection{Hardware Architecture}\label{md_README_autotoc_md5}
+The implementation targets a RISC-\/V environment with the following specs\+:
+\begin{DoxyItemize}
+\item {\bfseries{Core}}\+: RV32\+IMC (Integer, Multiply, Compressed).
+\item {\bfseries{Custom ISA Extensions}}\+: Moves bottleneck operations like priority calculations into dedicated hardware logic (see the {\ttfamily hw-\/accel} branch).
+\item {\bfseries{Target Platform}}\+: RV32\+IMC on FPGA
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md6}{}\doxysection{Target Platform}\label{md_README_autotoc_md6}
+This project uses a custom FPGA-\/based RISC-\/V platform built around the {\bfseries{low\+RISC Ibex}} core configured for an RV32\+IMC-\/style environment.
+
+
+\begin{DoxyItemize}
+\item Ibex repository\+: \href{https://github.com/lowRISC/ibex}{\texttt{ https\+://github.\+com/low\+RISC/ibex}}
+\item Ibex documentation\+: \href{https://ibex-core.readthedocs.io/}{\texttt{ https\+://ibex-\/core.\+readthedocs.\+io/}}
+\item Ibex demo system\+: \href{https://github.com/lowRISC/ibex-demo-system}{\texttt{ https\+://github.\+com/low\+RISC/ibex-\/demo-\/system}}
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md7}{}\doxysection{Getting Started}\label{md_README_autotoc_md7}
+\hypertarget{md_README_autotoc_md8}{}\doxysubsection{Prerequisites}\label{md_README_autotoc_md8}
+
+\begin{DoxyItemize}
+\item {\bfseries{RISC-\/V Toolchain}}\+: {\ttfamily riscv64-\/unknown-\/elf-\/gcc} or similar cross-\/compiler.
+\item {\bfseries{Hardware/\+Simulator}}\+: An FPGA development board or a cycle-\/accurate simulator (e.\+g., Verilator) supporting the RV32\+IMC extension.
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md9}{}\doxysubsection{Build Instructions}\label{md_README_autotoc_md9}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\# Clone the repository}
+\DoxyCodeLine{git clone https://github.com/alshehhi-\/ab/dstar-\/lite-\/fpga.git}
+\DoxyCodeLine{cd dstar-\/lite-\/fpga}
+\DoxyCodeLine{}
+\DoxyCodeLine{\# Build the project}
+\DoxyCodeLine{make}
+
+\end{DoxyCode}
+
+
+To clean the build\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make clean}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md10}{}\doxysection{Academic References}\label{md_README_autotoc_md10}
+If you use this work in your research, please cite the original D$\ast$ Lite paper\+:
+
+\begin{quote}
+Koenig, S., \& Likhachev, M. (2002). {\bfseries{D$\ast$ Lite}}. {\itshape Proceedings of the Eighteenth National Conference on Artificial Intelligence}, 476–483. \end{quote}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{@inproceedings\{koenig2002dstar,}
+\DoxyCodeLine{  author = \{Koenig, Sven and Likhachev, Maxim\},}
+\DoxyCodeLine{  title = \{D* Lite\},}
+\DoxyCodeLine{  booktitle = \{Proceedings of the Eighteenth National Conference on Artificial Intelligence\},}
+\DoxyCodeLine{  year = \{2002\},}
+\DoxyCodeLine{  pages = \{476-\/-\/483\},}
+\DoxyCodeLine{  publisher = \{AAAI Press\},}
+\DoxyCodeLine{  address = \{Edmonton, Alberta, Canada\}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md11}{}\doxysubsection{Additional Papers\+:}\label{md_README_autotoc_md11}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{@INPROCEEDINGS\{koenig2002improved,}
+\DoxyCodeLine{  author=\{Koenig, S. and Likhachev, M.\},}
+\DoxyCodeLine{  booktitle=\{Proceedings 2002 IEEE International Conference on Robotics and Automation (Cat. No.02CH37292)\}, }
+\DoxyCodeLine{  title=\{Improved fast replanning for robot navigation in unknown terrain\}, }
+\DoxyCodeLine{  year=\{2002\},}
+\DoxyCodeLine{  volume=\{1\},}
+\DoxyCodeLine{  number=\{\},}
+\DoxyCodeLine{  pages=\{968-\/975 vol.1\},}
+\DoxyCodeLine{  keywords=\{Navigation;Robot kinematics;Mobile robots;Motion planning;Costs;Land vehicles;Software prototyping;Prototypes;Educational institutions;Search methods\},}
+\DoxyCodeLine{  doi=\{10.1109/ROBOT.2002.1013481\}\}}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md12}{}\doxysubsection{Repository Bib\+TeX}\label{md_README_autotoc_md12}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{@software\{alshehhi\_dstar\_fpga\_2026,}
+\DoxyCodeLine{  author = \{Alshehhi, A.\},}
+\DoxyCodeLine{  title = \{D* Lite for FPGAs: Hardware-\/Accelerated Path Planning\},}
+\DoxyCodeLine{  year = \{2026\},}
+\DoxyCodeLine{  url = \{https://github.com/alshehhi-\/ab/dstar-\/lite-\/fpga\},}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md13}{}\doxysection{Authors}\label{md_README_autotoc_md13}
+
+\begin{DoxyItemize}
+\item \href{https://www.github.com/alshehhi-ab}{\texttt{ @alshehhi-\/ab}}
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md14}{}\doxysection{License}\label{md_README_autotoc_md14}
+This project is licensed under the \href{https://www.apache.org/licenses/LICENSE-2.0}{\texttt{ Apache 2.\+0 License}}. 

@@ -1,0 +1,69 @@
+\hypertarget{dstar__lite_8h}{}\doxysection{include/dstar\+\_\+lite.h File Reference}
+\label{dstar__lite_8h}\index{include/dstar\_lite.h@{include/dstar\_lite.h}}
+{\ttfamily \#include $<$cstdint$>$}\newline
+{\ttfamily \#include $<$climits$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$queue$>$}\newline
+{\ttfamily \#include \char`\"{}state.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}grid\+\_\+map.\+h\char`\"{}}\newline
+Include dependency graph for dstar\+\_\+lite.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dstar__lite_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dstar__lite_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structKey}{Key}}
+\begin{DoxyCompactList}\small\item\em Lexicographic key used by D$\ast$\+Lite Priority Queue. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structStateValue}{State\+Value}}
+\begin{DoxyCompactList}\small\item\em Cost values associated with a state. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structPQNode}{PQNode}}
+\begin{DoxyCompactList}\small\item\em Is a node within the priority queue. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structPQNodeCompare}{PQNode\+Compare}}
+\begin{DoxyCompactList}\small\item\em Comparator definition for the OPEN PQ. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classDStarLite}{DStar\+Lite}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{dstar__lite_8h_a78acb61a598d392ecc57d80c1d792d9c}{Heuristic\+Type}} \+: uint8\+\_\+t \{ \mbox{\hyperlink{dstar__lite_8h_a78acb61a598d392ecc57d80c1d792d9cab144edd03184bb99625a8f12cd0d78ae}{k\+Manhattan}} = 0
+, \mbox{\hyperlink{dstar__lite_8h_a78acb61a598d392ecc57d80c1d792d9ca3d1ec1a2fdf85ee0983ec59250097681}{k\+Octile}} = 1
+, \mbox{\hyperlink{dstar__lite_8h_a78acb61a598d392ecc57d80c1d792d9ca6a79237f1b49a62d350820ac0b0f6c98}{k\+Chebyshev}} = 2
+ \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{dstar__lite_8h_a78acb61a598d392ecc57d80c1d792d9c}\label{dstar__lite_8h_a78acb61a598d392ecc57d80c1d792d9c}} 
+\index{dstar\_lite.h@{dstar\_lite.h}!HeuristicType@{HeuristicType}}
+\index{HeuristicType@{HeuristicType}!dstar\_lite.h@{dstar\_lite.h}}
+\doxysubsubsection{\texorpdfstring{HeuristicType}{HeuristicType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{dstar__lite_8h_a78acb61a598d392ecc57d80c1d792d9c}{Heuristic\+Type}} \+: uint8\+\_\+t\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kManhattan@{kManhattan}!dstar\_lite.h@{dstar\_lite.h}}\index{dstar\_lite.h@{dstar\_lite.h}!kManhattan@{kManhattan}}}\mbox{\Hypertarget{dstar__lite_8h_a78acb61a598d392ecc57d80c1d792d9cab144edd03184bb99625a8f12cd0d78ae}\label{dstar__lite_8h_a78acb61a598d392ecc57d80c1d792d9cab144edd03184bb99625a8f12cd0d78ae}} 
+k\+Manhattan&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kOctile@{kOctile}!dstar\_lite.h@{dstar\_lite.h}}\index{dstar\_lite.h@{dstar\_lite.h}!kOctile@{kOctile}}}\mbox{\Hypertarget{dstar__lite_8h_a78acb61a598d392ecc57d80c1d792d9ca3d1ec1a2fdf85ee0983ec59250097681}\label{dstar__lite_8h_a78acb61a598d392ecc57d80c1d792d9ca3d1ec1a2fdf85ee0983ec59250097681}} 
+k\+Octile&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kChebyshev@{kChebyshev}!dstar\_lite.h@{dstar\_lite.h}}\index{dstar\_lite.h@{dstar\_lite.h}!kChebyshev@{kChebyshev}}}\mbox{\Hypertarget{dstar__lite_8h_a78acb61a598d392ecc57d80c1d792d9ca6a79237f1b49a62d350820ac0b0f6c98}\label{dstar__lite_8h_a78acb61a598d392ecc57d80c1d792d9ca6a79237f1b49a62d350820ac0b0f6c98}} 
+k\+Chebyshev&\\
+\hline
+
+\end{DoxyEnumFields}

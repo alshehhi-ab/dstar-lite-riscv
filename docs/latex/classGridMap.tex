@@ -1,0 +1,205 @@
+\hypertarget{classGridMap}{}\doxysection{Grid\+Map Class Reference}
+\label{classGridMap}\index{GridMap@{GridMap}}
+
+
+{\ttfamily \#include $<$grid\+\_\+map.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classGridMap_a5f20cf18b8f5e150f64124cabecf5fa6}{Grid\+Map}} (int32\+\_\+t width, int32\+\_\+t height, \mbox{\hyperlink{grid__map_8h_a44f6b90da41b0bb3292617d50b957a3f}{Connectivity}} connectivity)
+\item 
+bool \mbox{\hyperlink{classGridMap_a94be64720a59d6f9f318867dd505078f}{is\+Valid}} (const \mbox{\hyperlink{structState}{State}} \&state) const
+\item 
+bool \mbox{\hyperlink{classGridMap_a8335a7a2f80765040a94addef8360349}{is\+Blocked}} (const \mbox{\hyperlink{structState}{State}} \&state) const
+\item 
+void \mbox{\hyperlink{classGridMap_a61c4a13c99d58a02db5aead64fc8d50b}{set\+Blocked}} (const \mbox{\hyperlink{structState}{State}} \&state, bool is\+\_\+blocked)
+\item 
+int32\+\_\+t \mbox{\hyperlink{classGridMap_a117cd0e3e1975701f8187f368819738e}{cost}} (const \mbox{\hyperlink{structState}{State}} \&state\+\_\+a, const \mbox{\hyperlink{structState}{State}} \&state\+\_\+b) const
+\item 
+std\+::vector$<$ \mbox{\hyperlink{structState}{State}} $>$ \mbox{\hyperlink{classGridMap_a59c8f6bbf5751d7d5364293c7a0bf161}{get\+Neighbors}} (const \mbox{\hyperlink{structState}{State}} \&state) const
+\item 
+std\+::vector$<$ \mbox{\hyperlink{structState}{State}} $>$ \mbox{\hyperlink{classGridMap_a68dab99a1413ed3d820d3d191ade415f}{get\+Succ}} (const \mbox{\hyperlink{structState}{State}} \&state) const
+\item 
+std\+::vector$<$ \mbox{\hyperlink{structState}{State}} $>$ \mbox{\hyperlink{classGridMap_ab91b39ab1345f709ef863b316e748917}{get\+Pred}} (const \mbox{\hyperlink{structState}{State}} \&state) const
+\item 
+int32\+\_\+t \mbox{\hyperlink{classGridMap_a2437ed6927ef635788433ccf245381e3}{get\+Width}} () const
+\item 
+int32\+\_\+t \mbox{\hyperlink{classGridMap_a6873f1f94a3d4572dd884f14ff548a5d}{get\+Height}} () const
+\item 
+\mbox{\hyperlink{grid__map_8h_a44f6b90da41b0bb3292617d50b957a3f}{Connectivity}} \mbox{\hyperlink{classGridMap_a615d01b5cf6ee1fc3539d30a7ec77d84}{get\+Connectivity}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classGridMap_a5f20cf18b8f5e150f64124cabecf5fa6}\label{classGridMap_a5f20cf18b8f5e150f64124cabecf5fa6}} 
+\index{GridMap@{GridMap}!GridMap@{GridMap}}
+\index{GridMap@{GridMap}!GridMap@{GridMap}}
+\doxysubsubsection{\texorpdfstring{GridMap()}{GridMap()}}
+{\footnotesize\ttfamily Grid\+Map\+::\+Grid\+Map (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{width,  }\item[{int32\+\_\+t}]{height,  }\item[{\mbox{\hyperlink{grid__map_8h_a44f6b90da41b0bb3292617d50b957a3f}{Connectivity}}}]{connectivity }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classGridMap_a117cd0e3e1975701f8187f368819738e}\label{classGridMap_a117cd0e3e1975701f8187f368819738e}} 
+\index{GridMap@{GridMap}!cost@{cost}}
+\index{cost@{cost}!GridMap@{GridMap}}
+\doxysubsubsection{\texorpdfstring{cost()}{cost()}}
+{\footnotesize\ttfamily int32\+\_\+t Grid\+Map\+::cost (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structState}{State}} \&}]{state\+\_\+a,  }\item[{const \mbox{\hyperlink{structState}{State}} \&}]{state\+\_\+b }\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classGridMap_a117cd0e3e1975701f8187f368819738e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classGridMap_a615d01b5cf6ee1fc3539d30a7ec77d84}\label{classGridMap_a615d01b5cf6ee1fc3539d30a7ec77d84}} 
+\index{GridMap@{GridMap}!getConnectivity@{getConnectivity}}
+\index{getConnectivity@{getConnectivity}!GridMap@{GridMap}}
+\doxysubsubsection{\texorpdfstring{getConnectivity()}{getConnectivity()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{grid__map_8h_a44f6b90da41b0bb3292617d50b957a3f}{Connectivity}} Grid\+Map\+::get\+Connectivity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\mbox{\Hypertarget{classGridMap_a6873f1f94a3d4572dd884f14ff548a5d}\label{classGridMap_a6873f1f94a3d4572dd884f14ff548a5d}} 
+\index{GridMap@{GridMap}!getHeight@{getHeight}}
+\index{getHeight@{getHeight}!GridMap@{GridMap}}
+\doxysubsubsection{\texorpdfstring{getHeight()}{getHeight()}}
+{\footnotesize\ttfamily int32\+\_\+t Grid\+Map\+::get\+Height (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=341pt]{classGridMap_a6873f1f94a3d4572dd884f14ff548a5d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classGridMap_a59c8f6bbf5751d7d5364293c7a0bf161}\label{classGridMap_a59c8f6bbf5751d7d5364293c7a0bf161}} 
+\index{GridMap@{GridMap}!getNeighbors@{getNeighbors}}
+\index{getNeighbors@{getNeighbors}!GridMap@{GridMap}}
+\doxysubsubsection{\texorpdfstring{getNeighbors()}{getNeighbors()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{structState}{State}} $>$ Grid\+Map\+::get\+Neighbors (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structState}{State}} \&}]{state }\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=341pt]{classGridMap_a59c8f6bbf5751d7d5364293c7a0bf161_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classGridMap_a59c8f6bbf5751d7d5364293c7a0bf161_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classGridMap_ab91b39ab1345f709ef863b316e748917}\label{classGridMap_ab91b39ab1345f709ef863b316e748917}} 
+\index{GridMap@{GridMap}!getPred@{getPred}}
+\index{getPred@{getPred}!GridMap@{GridMap}}
+\doxysubsubsection{\texorpdfstring{getPred()}{getPred()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{structState}{State}} $>$ Grid\+Map\+::get\+Pred (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structState}{State}} \&}]{state }\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classGridMap_ab91b39ab1345f709ef863b316e748917_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classGridMap_a68dab99a1413ed3d820d3d191ade415f}\label{classGridMap_a68dab99a1413ed3d820d3d191ade415f}} 
+\index{GridMap@{GridMap}!getSucc@{getSucc}}
+\index{getSucc@{getSucc}!GridMap@{GridMap}}
+\doxysubsubsection{\texorpdfstring{getSucc()}{getSucc()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{structState}{State}} $>$ Grid\+Map\+::get\+Succ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structState}{State}} \&}]{state }\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classGridMap_a68dab99a1413ed3d820d3d191ade415f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classGridMap_a2437ed6927ef635788433ccf245381e3}\label{classGridMap_a2437ed6927ef635788433ccf245381e3}} 
+\index{GridMap@{GridMap}!getWidth@{getWidth}}
+\index{getWidth@{getWidth}!GridMap@{GridMap}}
+\doxysubsubsection{\texorpdfstring{getWidth()}{getWidth()}}
+{\footnotesize\ttfamily int32\+\_\+t Grid\+Map\+::get\+Width (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=337pt]{classGridMap_a2437ed6927ef635788433ccf245381e3_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classGridMap_a8335a7a2f80765040a94addef8360349}\label{classGridMap_a8335a7a2f80765040a94addef8360349}} 
+\index{GridMap@{GridMap}!isBlocked@{isBlocked}}
+\index{isBlocked@{isBlocked}!GridMap@{GridMap}}
+\doxysubsubsection{\texorpdfstring{isBlocked()}{isBlocked()}}
+{\footnotesize\ttfamily bool Grid\+Map\+::is\+Blocked (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structState}{State}} \&}]{state }\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=322pt]{classGridMap_a8335a7a2f80765040a94addef8360349_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classGridMap_a8335a7a2f80765040a94addef8360349_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classGridMap_a94be64720a59d6f9f318867dd505078f}\label{classGridMap_a94be64720a59d6f9f318867dd505078f}} 
+\index{GridMap@{GridMap}!isValid@{isValid}}
+\index{isValid@{isValid}!GridMap@{GridMap}}
+\doxysubsubsection{\texorpdfstring{isValid()}{isValid()}}
+{\footnotesize\ttfamily bool Grid\+Map\+::is\+Valid (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structState}{State}} \&}]{state }\end{DoxyParamCaption}) const}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classGridMap_a94be64720a59d6f9f318867dd505078f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classGridMap_a61c4a13c99d58a02db5aead64fc8d50b}\label{classGridMap_a61c4a13c99d58a02db5aead64fc8d50b}} 
+\index{GridMap@{GridMap}!setBlocked@{setBlocked}}
+\index{setBlocked@{setBlocked}!GridMap@{GridMap}}
+\doxysubsubsection{\texorpdfstring{setBlocked()}{setBlocked()}}
+{\footnotesize\ttfamily void Grid\+Map\+::set\+Blocked (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structState}{State}} \&}]{state,  }\item[{bool}]{is\+\_\+blocked }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=329pt]{classGridMap_a61c4a13c99d58a02db5aead64fc8d50b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classGridMap_a61c4a13c99d58a02db5aead64fc8d50b_icgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{grid__map_8h}{grid\+\_\+map.\+h}}\item 
+src/\mbox{\hyperlink{grid__map_8cpp}{grid\+\_\+map.\+cpp}}\end{DoxyCompactItemize}

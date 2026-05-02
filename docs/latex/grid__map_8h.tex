@@ -1,0 +1,91 @@
+\hypertarget{grid__map_8h}{}\doxysection{include/grid\+\_\+map.h File Reference}
+\label{grid__map_8h}\index{include/grid\_map.h@{include/grid\_map.h}}
+{\ttfamily \#include $<$cstdint$>$}\newline
+{\ttfamily \#include $<$climits$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include \char`\"{}state.\+h\char`\"{}}\newline
+Include dependency graph for grid\+\_\+map.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=276pt]{grid__map_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{grid__map_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classGridMap}{Grid\+Map}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{grid__map_8h_a44f6b90da41b0bb3292617d50b957a3f}{Connectivity}} \+: uint8\+\_\+t \{ \mbox{\hyperlink{grid__map_8h_a44f6b90da41b0bb3292617d50b957a3fafe006e6a0bd199a862fe318e8f1c0318}{k\+Four}} = 4
+, \mbox{\hyperlink{grid__map_8h_a44f6b90da41b0bb3292617d50b957a3faa21c1735c7d907cdbd9b7a32de4d4985}{k\+Eight}} = 8
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+constexpr int32\+\_\+t \mbox{\hyperlink{grid__map_8h_a9ca3d676905b216398a47fe9daf8c83c}{k\+Infinity}} = INT32\+\_\+\+MAX / 4
+\item 
+constexpr int32\+\_\+t \mbox{\hyperlink{grid__map_8h_a9896b6e8af7bd30c34947bd5113fdf2b}{k\+Cost\+Scale}} = 1000
+\item 
+constexpr int32\+\_\+t \mbox{\hyperlink{grid__map_8h_a4e998448d11cb465273981199c271f42}{k\+Straight\+Cost}} = 1000
+\item 
+constexpr int32\+\_\+t \mbox{\hyperlink{grid__map_8h_a84ce53fb25955563f86f1aad2c72f2d6}{k\+Diagonal\+Cost}} = 1414
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{grid__map_8h_a44f6b90da41b0bb3292617d50b957a3f}\label{grid__map_8h_a44f6b90da41b0bb3292617d50b957a3f}} 
+\index{grid\_map.h@{grid\_map.h}!Connectivity@{Connectivity}}
+\index{Connectivity@{Connectivity}!grid\_map.h@{grid\_map.h}}
+\doxysubsubsection{\texorpdfstring{Connectivity}{Connectivity}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{grid__map_8h_a44f6b90da41b0bb3292617d50b957a3f}{Connectivity}} \+: uint8\+\_\+t\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kFour@{kFour}!grid\_map.h@{grid\_map.h}}\index{grid\_map.h@{grid\_map.h}!kFour@{kFour}}}\mbox{\Hypertarget{grid__map_8h_a44f6b90da41b0bb3292617d50b957a3fafe006e6a0bd199a862fe318e8f1c0318}\label{grid__map_8h_a44f6b90da41b0bb3292617d50b957a3fafe006e6a0bd199a862fe318e8f1c0318}} 
+k\+Four&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kEight@{kEight}!grid\_map.h@{grid\_map.h}}\index{grid\_map.h@{grid\_map.h}!kEight@{kEight}}}\mbox{\Hypertarget{grid__map_8h_a44f6b90da41b0bb3292617d50b957a3faa21c1735c7d907cdbd9b7a32de4d4985}\label{grid__map_8h_a44f6b90da41b0bb3292617d50b957a3faa21c1735c7d907cdbd9b7a32de4d4985}} 
+k\+Eight&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{grid__map_8h_a9896b6e8af7bd30c34947bd5113fdf2b}\label{grid__map_8h_a9896b6e8af7bd30c34947bd5113fdf2b}} 
+\index{grid\_map.h@{grid\_map.h}!kCostScale@{kCostScale}}
+\index{kCostScale@{kCostScale}!grid\_map.h@{grid\_map.h}}
+\doxysubsubsection{\texorpdfstring{kCostScale}{kCostScale}}
+{\footnotesize\ttfamily constexpr int32\+\_\+t k\+Cost\+Scale = 1000\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+\mbox{\Hypertarget{grid__map_8h_a84ce53fb25955563f86f1aad2c72f2d6}\label{grid__map_8h_a84ce53fb25955563f86f1aad2c72f2d6}} 
+\index{grid\_map.h@{grid\_map.h}!kDiagonalCost@{kDiagonalCost}}
+\index{kDiagonalCost@{kDiagonalCost}!grid\_map.h@{grid\_map.h}}
+\doxysubsubsection{\texorpdfstring{kDiagonalCost}{kDiagonalCost}}
+{\footnotesize\ttfamily constexpr int32\+\_\+t k\+Diagonal\+Cost = 1414\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+\mbox{\Hypertarget{grid__map_8h_a9ca3d676905b216398a47fe9daf8c83c}\label{grid__map_8h_a9ca3d676905b216398a47fe9daf8c83c}} 
+\index{grid\_map.h@{grid\_map.h}!kInfinity@{kInfinity}}
+\index{kInfinity@{kInfinity}!grid\_map.h@{grid\_map.h}}
+\doxysubsubsection{\texorpdfstring{kInfinity}{kInfinity}}
+{\footnotesize\ttfamily constexpr int32\+\_\+t k\+Infinity = INT32\+\_\+\+MAX / 4\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+\mbox{\Hypertarget{grid__map_8h_a4e998448d11cb465273981199c271f42}\label{grid__map_8h_a4e998448d11cb465273981199c271f42}} 
+\index{grid\_map.h@{grid\_map.h}!kStraightCost@{kStraightCost}}
+\index{kStraightCost@{kStraightCost}!grid\_map.h@{grid\_map.h}}
+\doxysubsubsection{\texorpdfstring{kStraightCost}{kStraightCost}}
+{\footnotesize\ttfamily constexpr int32\+\_\+t k\+Straight\+Cost = 1000\hspace{0.3cm}{\ttfamily [constexpr]}}
+
