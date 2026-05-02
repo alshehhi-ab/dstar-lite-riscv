@@ -365,7 +365,7 @@ void DStarLite::reconstructPath()
 
     const int32_t max_steps = grid.getWidth() * grid.getHeight();
 
-    for (int32_t step = 0; step < max_steps && current != s_goal; ++step) {
+    for (int32_t step = 0; (step < max_steps) && (current != s_goal); ++step) {
         int32_t best_cost = kInfinity;
         State best_successor{};
         bool found = false;
@@ -409,13 +409,41 @@ const std::vector<State> &DStarLite::getPath() const {
 // Main planning functions
 
 bool DStarLite::plan() {
-    //TODO
-    return false;
-  
-}
+    
+    if (!grid.isValid(s_start) || !grid.isValid(s_goal)) {
+        path.clear();
+        return false;
+    }
+
+    if (grid.isBlocked(s_start) || grid.isBlocked(s_goal)) {
+        path.clear();
+        return false;
+    }
+
+
+    s_last = s_start;
+    initialize();
+    computeShortestPath();
+
+    reconstructPath();
+    return ((!path.empty()) && (path.back() == s_goal));
+}   
+
 
 bool DStarLite::replan() {
-    return false;
+    
+    computeShortestPath();
+
+    // If g(s_start) = infinity then no path exists.
+    if (getG(s_start) == kInfinity) {
+        path.clear();
+        return false;
+    }
+
+    // Now rebuild the path again.
+    reconstructPath();
+
+    return ((!path.empty()) && (path.back() == s_goal));
 } 
 
 
@@ -423,24 +451,39 @@ bool DStarLite::replan() {
 // Dynamic planning helpers
 void DStarLite::updateStart(const State &new_start) {
 
-    if (!grid.isValid(new_start)){
+    if ((!grid.isValid(new_start)) || (grid.isBlocked(new_start))){
         return;
     }
 
+    km += heuristic(s_last, new_start);
+
+    s_last = new_start;
     s_start = new_start;
-    path.push_back(s_start);
+
+    path.clear();
 }
 
 void DStarLite::setBlocked(const State &state, bool is_blocked) {
 
-    if (!grid.isValid(state)){
+    if ((!grid.isValid(state)) || (grid.isBlocked(state) == is_blocked)){
         return;
     }
 
-    if (grid.isBlocked(state) == is_blocked) {
-        return;
-    }
 
+    //km += heuristic(s_last, s_start);
+    //s_last = s_start;
+
+    // Update the gridmap with the blocked state.
     grid.setBlocked(state, is_blocked);
+
+    // Update vertices that are affected by this block
+
+    // update the state itself
+    updateVertex(state);
+
+    // update its neighbours.
+    for (const State& neighbor : grid.getNeighbors(state)){
+        updateVertex(neighbor);
+    }
     
 }
