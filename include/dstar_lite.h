@@ -33,8 +33,8 @@ constexpr int32_t kDiagonalCost = 1414;
 
 enum class HeuristicType : uint8_t {
     kManhattan = 0,
-    kEuclidean = 1,
-    kChebyshev = 2,
+    kOctile = 1,
+    kChebyshev = 2
 };
 
 /**
@@ -48,24 +48,25 @@ struct Key{
 
     // Comparison operators
     bool operator < (const Key& other) const{
-        if (k1 != other.k1) {
+        // check equality of k1. If both k1 values are equal check the k2 values.
+        if (k1 != other.k1) { //k1 's are different 
             return (k1 < other.k1);
             }
-        else {
+        else { // k1 's are the same, so check k2
             return (k2 < other.k2);
         }
         }
     
-    bool operator > (const Key& other) const{
+    bool operator > (const Key& other) const{ // opposite of less than operator
         return (other < *this);
     }
 
-    bool operator == (const Key& other) const{
+    bool operator == (const Key& other) const{ // keys are equal when both elements are the same
         return ((k1 == other.k1) && (k2 == other.k2));
     }
 
-    bool operator != (const Key& other) const{
-        return !(*this == other);
+    bool operator != (const Key& other) const{ // Two kets are not equal
+        return !(*this == other); // inverse of the equality operator.
     }
     
 };
@@ -118,8 +119,9 @@ class DStarLite {
     // PQ and vectors
 
         /**
-         * @brief Open List
+         * @brief OPEN PQ
          * 
+         * Is D* Lite's "U" list as defined by Koenig and Likhachev 
          */
         std::priority_queue<PQNode, std::vector<PQNode>, PQNodeCompare> open;
 
@@ -151,6 +153,8 @@ class DStarLite {
          * @param state 
          */
         void insert(const State& state);
+
+        void insert(const State& state, const Key& key);
 
         /**
          * @brief Removes a state from the OPEN PQ.
@@ -211,6 +215,7 @@ class DStarLite {
          * @brief Construct a new DStarLite object
          * 
          * @param grid 
+         * @param heuristic_type (0 for Manhattan, 1 for Octile, 2 for Chebyshev)
          */
         DStarLite(const GridMap& grid, const HeuristicType heuristic_type = HeuristicType::kManhattan);
 
@@ -252,12 +257,16 @@ class DStarLite {
          */
         void setGoal(const State& goal);
 
+        void updateStart(const State& new_start);
+
+        void setBlocked(const State& state, bool is_blocked);
+
         /**
          * @brief Get the Path of states.
          * 
          * @return std::vector<State> 
          */
-        std::vector<State> getPath() const;
+        const std::vector<State>& getPath() const;
 
         /**
          * @brief set the g cost of a given state.
@@ -294,7 +303,7 @@ class DStarLite {
         /**
          * @brief Set the Heuristic Type of the planner
          * 
-         * @param heuristic_type (0 for manhattan, 1 for euclidean, 2 for Chebyshev)
+         * @param heuristic_type (0 for manhattan, 1 for octile, 2 for Chebyshev)
          */
         void setHeuristicType(HeuristicType heuristic_type);
         
@@ -305,6 +314,7 @@ class DStarLite {
          */
         HeuristicType getHeuristicType() const;
 
+        bool replan();
 };
 
 

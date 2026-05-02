@@ -26,7 +26,7 @@ struct State{
     int32_t y;
 
     bool operator == (const State& otherState) const {
-        return ((x == otherState.x)  && (y == otherState.y)); 
+        return ((x == otherState.x) && (y == otherState.y)); 
     }
 
     bool operator != (const State& otherState) const {
