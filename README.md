@@ -5,7 +5,7 @@
 ![RISC-V](https://img.shields.io/badge/Arch-RISC--V-EF3D30?style=flat&logo=riscv&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-Active_Research-success)
 
-This repository contains a high-performance implementation of the **D* Lite** path-planning algorithm, specifically optimised for **RV32I/IMC** RISC-V soft-cores running on **FPGA** hardware.
+This repository contains a high-performance implementation of the **D**Lite* path-planning algorithm, specifically optimised for **RV32I/IMC** RISC-V soft-cores running on **FPGA** hardware.
 
 
 ## Overview
