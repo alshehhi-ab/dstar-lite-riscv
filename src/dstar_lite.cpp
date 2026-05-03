@@ -21,6 +21,7 @@ DStarLite::DStarLite(const GridMap &grid, const HeuristicType heuristic_type) :
     grid(grid),
     heuristic_type(heuristic_type){
         state_values.resize(grid.getWidth() * grid.getHeight());
+        in_open.assign(grid.getWidth() * grid.getHeight(), false);  // added for lazy-deletion
     }
 
 // Public setters and getters for basic D* Lite utility.
@@ -138,12 +139,22 @@ int32_t DStarLite::heuristic(const State &state_a, const State &state_b) const {
 
 void DStarLite::insert(const State &state) {
     
+    if (!grid.isValid(state)) {
+        return;
+    }
+
     // insert a state with a key into the OPEN PQ
+    in_open[toIndex(state)] = true; // Lazy-deletion tracking list
     open.push(PQNode{state, calculateKey(state)});
 }
 
 void DStarLite::insert(const State &state, const Key &key) {
     
+    if (!grid.isValid(state)){
+        return;
+    }
+    
+    in_open[toIndex(state)] = true; // Lazy-deletion tracking list
     open.push(PQNode{state, key});
 }
 
@@ -151,27 +162,10 @@ void DStarLite::insert(const State &state, const Key &key) {
 void DStarLite::remove(const State &state) {
     // Remove the state from the priority queue.
 
-    // PQ do not natively support direct removal.
-    // So alternative ways must be done.
+    // Lazy-deletion version:
 
-    // Rebuilding the queue:
-    std::priority_queue<PQNode, std::vector<PQNode>, PQNodeCompare> filtered_open;
-
-    while (!open.empty()) {
-        
-        // Get topmost.
-        const PQNode node = open.top();
-
-        // Add it to the filtered PQ if it is not the element to be removed.
-        if (node.state != state) {
-            filtered_open.push(node);
-        }
-
-        // Remove the node from the original PQ
-        open.pop();
-    }
-    
-    open = filtered_open;
+    if (!grid.isValid(state)) return;
+    in_open[toIndex(state)] = false;
 
 }
 
@@ -212,6 +206,9 @@ void DStarLite::initialize(){
         value.g = kInfinity;
         value.rhs = kInfinity;
     }
+
+    // Reset OPEN membership trackers. (lazy-deletion fix)
+    std::fill(in_open.begin(), in_open.end(), false);
 
     // Set rhs of s_goal = 0
     setRhs(s_goal, 0);
@@ -275,6 +272,15 @@ void DStarLite::computeShortestPath() {
         open.pop(); // remove u from OPEN since we will update it.
 
         const State u = node_u.state;
+
+        // Lazy-deletion: skip if u is removed/superseded
+        if ((!grid.isValid(u)) || (!in_open[toIndex(u)])){
+            continue;
+        }
+
+        in_open[toIndex(u)] = false;
+
+        
         const Key key_old = node_u.key;
         const Key key_new = calculateKey(u);
 

@@ -134,6 +134,13 @@ class DStarLite {
         std::vector<StateValue> state_values;
 
         /**
+         * @brief Tracks whether a state is currently in the OPEN PQ.
+         * 
+         * Used for O(1) lazy ddeletion.
+         */
+        std::vector<bool>in_open;
+
+        /**
          * @brief Vector of the path taken by the planner
          * 
          */
