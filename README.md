@@ -22,7 +22,7 @@ This project is divided into branches based on the level of hardware integration
 
 ## Theoretical Background
 
-The **D* Lite** algorithm, developed by **Sven Koenig** and **Maxim Likhachev**, is an incremental heuristic search method. Unlike static planners, D* Lite efficiently repairs previous search results when obstacles are detected, avoiding the need to plan from scratch.
+The **D** Lite* algorithm, developed by **Sven Koenig** and **Maxim Likhachev**, is an incremental heuristic search method. Unlike static planners, D* Lite efficiently repairs previous search results when obstacles are detected, avoiding the need to plan from scratch.
 
 ### Key Features
 * **Incremental Replanning**: Handles dynamic world changes efficiently.
