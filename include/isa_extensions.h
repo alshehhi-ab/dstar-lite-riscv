@@ -27,7 +27,7 @@
 //
 //   Mnemonic   funct7    funct3   rd    rs1         rs2         Operation
 //   ────────── ───────── ──────── ───── ─────────── ─────────── ──────────────────────────────
-//   KCMP       0000000   000      rd    key_a.k1    key_b.k1    rd = (key_a < key_b) ? 1 : 0
+//   KCMP       0000000   000      rd    key_a.k1    key_b.k1    rd = (key_a < key_b) ? 1 : 0   [TODO]
 //   KCALC      0000000   001      rd    state       x0          rd = calculateKey(state)
 //   GCOST      0000000   010      rd    state       x0          rd = g(state)
 //   RCOST      0000000   011      rd    state       x0          rd = rhs(state)
@@ -116,7 +116,7 @@ __asm__ volatile ("csrr %0, " #csr : "=r"((val)) : : )
     __asm__ volatile ("csrc " #csr ", %0" : : "r"((uint32_t)(mask)) : "memory")
 
 // RW CSR in one instruction
-#define CSR_SWAP(csr, val, old) \
+#define CSR_SWAR(csr, val, old) \
     __asm__ volatile ("csrrw %0, " #csr ", %1" : "=r"((old)) : "r"((int32_t)(val)) : "memory")
 
 
@@ -229,8 +229,7 @@ static inline int32_t unpack_y(int32_t packed) {
  * @return      1 if key_a < key_b, 0 otherwise
  * 
  */
-
-static inline int32_t kcmp(int32_t k1_a, int32_t k2_a,
+/* static inline int32_t kcmp(int32_t k1_a, int32_t k2_a,
                             int32_t k1_b, int32_t k2_b) {
     int32_t result;
     // Pack k2 values into rs2: k2_a in [15:0], k2_b in [31:16]
@@ -243,7 +242,7 @@ static inline int32_t kcmp(int32_t k1_a, int32_t k2_a,
     );
     (void)k1_b; (void)k2_b;
     return result;
-
+} */
 
 /**
  * @brief KCALC : Key calculation.
@@ -349,26 +348,104 @@ static inline void rset(int32_t state_packed, int32_t value) {
     );
 }
 
+
+// HEURISTIC (3 TYPES)
+
+/**
+ * @brief HEUR (Manhattan) : Manhattan distance heuristic.
+ * 
+ * Returns kStraightCost * (|dx| + |dy|).
+ * Reads kStraightCost from CSR 0x808.
+ * funct7=0x00, funct3=0x7
+ * 
+ * @param state_a_packed  Packed state_a (x in [15:0], y in [31:16])
+ * @param state_b_packed  Packed state_b (x in [15:0], y in [31:16])
+ * @return                Manhattan heuristic distance
+ */
+
+static inline int32_t heur_manhattan(int32_t state_a_packed, int32_t state_b_packed) {
+    int32_t result;
+    __asm__ volatile (
+        ".insn r 0x0B, 0x7, 0x00, %0, %1, %2\n\t"
+        : "=r"(result)
+        : "r"(state_a_packed), "r"(state_b_packed)
+        :
+    );
+    return result;
+}
+
+/**
+ * @brief HEUR (Octile) : Octile distance heuristic.
+ * 
+ * Returns kStraightCost*(|dx|+|dy|) + (kDiagonalCost - 2*kStraightCost)*min(|dx|,|dy|).
+ * Reads cost constants from CSRs 0x808, 0x809.
+ * funct7=0x01, funct3=0x7
+ * 
+ * @param state_a_packed  Packed state_a (x in [15:0], y in [31:16])
+ * @param state_b_packed  Packed state_b (x in [15:0], y in [31:16])
+ * @return                Octile heuristic distance
+ */
+static inline int32_t heur_octile(int32_t state_a_packed, int32_t state_b_packed) {
+    int32_t result;
+    __asm__ volatile (
+        ".insn r 0x0B, 0x7, 0x01, %0, %1, %2\n\t"
+        : "=r"(result)
+        : "r"(state_a_packed), "r"(state_b_packed)
+        :
+    );
+    return result;
+}
+
+/**
+ * @brief HEUR (Chebyshev) : Chebyshev distance heuristic.
+ * 
+ * Returns kStraightCost * max(|dx|, |dy|).
+ * Reads kStraightCost from CSR 0x808.
+ * funct7=0x02, funct3=0x7
+ * 
+ * @param state_a_packed  Packed state_a (x in [15:0], y in [31:16])
+ * @param state_b_packed  Packed state_b (x in [15:0], y in [31:16])
+ * @return                Chebyshev heuristic distance
+ */
+static inline int32_t heur_chebyshev(int32_t state_a_packed, int32_t state_b_packed) {
+    int32_t result;
+    __asm__ volatile (
+        ".insn r 0x0B, 0x7, 0x02, %0, %1, %2\n\t"
+        : "=r"(result)
+        : "r"(state_a_packed), "r"(state_b_packed)
+        :
+    );
+    return result;
+}
+
+
+
 #else
 
 // [DELETE LATER, ONLY USE AS FALLBACK ON x86 FOR VERIFICATION]
 
 #include <cstdlib>
 
-// These are set by dstar_csr_init() and used by the fallback implementations
-static const void*  _sw_state_base     = nullptr;
-static const void*  _sw_blocked_base   = nullptr;
-static int32_t      _sw_width          = 0;
-static int32_t      _sw_height         = 0;
-static int32_t      _sw_start          = 0;
-static int32_t      _sw_km             = 0;
-static int32_t      _sw_infinity       = 0;
-static int32_t      _sw_straight_cost  = 0;
-static int32_t      _sw_diagonal_cost  = 0;
-static int32_t      _sw_heuristic_type = 0;
-static int32_t      _sw_connectivity   = 0;
 
-struct _SwStateValue { int32_t g; int32_t rhs; };
+struct swStateValue {
+    int32_t g; 
+    int32_t rhs;
+};
+
+// These are set by dstar_csr_init() and used by the fallback implementations
+static struct {                
+    const void*  state_base     = nullptr;
+    const void*  blocked_base   = nullptr;
+    int32_t      width          = 0;
+    int32_t      height         = 0;
+    int32_t      start          = 0;
+    int32_t      km             = 0;
+    int32_t      infinity       = 0;
+    int32_t      straight_cost  = 0;
+    int32_t      diagonal_cost  = 0;
+    int32_t      heuristic_type = 0;
+    int32_t      connectivity   = 0;
+} sw;
 
 static inline int32_t pack_state(int32_t x, int32_t y) {
     return (int32_t)(((uint32_t)y << 16) | ((uint32_t)x & 0xFFFF));
@@ -389,62 +466,61 @@ static inline void dstar_csr_init(
     int32_t goal_x,         int32_t goal_y,
     int32_t km,             int32_t infinity,
     int32_t straight_cost,  int32_t diagonal_cost,
-    int32_t heuristic_type, int32_t connectivity
-) {
-    _sw_state_base     = state_base;
-    _sw_blocked_base   = blocked_base;
-    _sw_width          = width;
-    _sw_height         = height;
-    _sw_start          = pack_state(start_x, start_y);
-    _sw_km             = km;
-    _sw_infinity       = infinity;
-    _sw_straight_cost  = straight_cost;
-    _sw_diagonal_cost  = diagonal_cost;
-    _sw_heuristic_type = heuristic_type;
-    _sw_connectivity   = connectivity;
+    int32_t heuristic_type, int32_t connectivity) {
+    sw.state_base     = state_base;
+    sw.blocked_base   = blocked_base;
+    sw.width          = width;
+    sw.height         = height;
+    sw.start          = pack_state(start_x, start_y);
+    sw.km             = km;
+    sw.infinity       = infinity;
+    sw.straight_cost  = straight_cost;
+    sw.diagonal_cost  = diagonal_cost;
+    sw.heuristic_type = heuristic_type;
+    sw.connectivity   = connectivity;
     (void)goal_x; (void)goal_y;
 }
 
 static inline void dstar_csr_set_km(int32_t km) {
-    _sw_km = km;
+    sw.km = km;
 }
 
 static inline void dstar_csr_set_start(int32_t x, int32_t y) {
-    _sw_start = pack_state(x, y);
+    sw.start = pack_state(x, y);
 }
 
 static inline int32_t gcost(int32_t packed) {
     int32_t x = unpack_x(packed);
     int32_t y = unpack_y(packed);
-    if (x < 0 || x >= _sw_width || y < 0 || y >= _sw_height)
-        return _sw_infinity;
-    const _SwStateValue* table = (const _SwStateValue*)_sw_state_base;
-    return table[y * _sw_width + x].g;
+    if (x < 0 || x >= sw.width || y < 0 || y >= sw.height)
+        return sw.infinity;
+    const swStateValue* table = (const swStateValue*)sw.state_base;
+    return table[y * sw.width + x].g;
 }
 
 static inline int32_t rcost(int32_t packed) {
     int32_t x = unpack_x(packed);
     int32_t y = unpack_y(packed);
-    if (x < 0 || x >= _sw_width || y < 0 || y >= _sw_height)
-        return _sw_infinity;
-    const _SwStateValue* table = (const _SwStateValue*)_sw_state_base;
-    return table[y * _sw_width + x].rhs;
+    if (x < 0 || x >= sw.width || y < 0 || y >= sw.height)
+        return sw.infinity;
+    const swStateValue* table = (const swStateValue*)sw.state_base;
+    return table[y * sw.width + x].rhs;
 }
 
 static inline void gset(int32_t packed, int32_t value) {
     int32_t x = unpack_x(packed);
     int32_t y = unpack_y(packed);
-    if (x < 0 || x >= _sw_width || y < 0 || y >= _sw_height) return;
-    _SwStateValue* table = (_SwStateValue*)_sw_state_base;
-    table[y * _sw_width + x].g = value;
+    if (x < 0 || x >= sw.width || y < 0 || y >= sw.height) return;
+    swStateValue* table = (swStateValue*)sw.state_base;
+    table[y * sw.width + x].g = value;
 }
 
 static inline void rset(int32_t packed, int32_t value) {
     int32_t x = unpack_x(packed);
     int32_t y = unpack_y(packed);
-    if (x < 0 || x >= _sw_width || y < 0 || y >= _sw_height) return;
-    _SwStateValue* table = (_SwStateValue*)_sw_state_base;
-    table[y * _sw_width + x].rhs = value;
+    if (x < 0 || x >= sw.width || y < 0 || y >= sw.height) return;
+    swStateValue* table = (swStateValue*)sw.state_base;
+    table[y * sw.width + x].rhs = value;
 }
 
 static inline int32_t kcmp(int32_t k1_a, int32_t k2_a,
@@ -456,60 +532,61 @@ static inline int32_t kcmp(int32_t k1_a, int32_t k2_a,
 static inline int32_t heur_manhattan(int32_t a, int32_t b) {
     int32_t dx = abs(unpack_x(b) - unpack_x(a));
     int32_t dy = abs(unpack_y(b) - unpack_y(a));
-    return _sw_straight_cost * (dx + dy);
+    return sw.straight_cost * (dx + dy);
 }
 
 static inline int32_t heur_octile(int32_t a, int32_t b) {
     int32_t dx = abs(unpack_x(b) - unpack_x(a));
     int32_t dy = abs(unpack_y(b) - unpack_y(a));
     int32_t mn = dx < dy ? dx : dy;
-    return _sw_straight_cost * (dx + dy) + (_sw_diagonal_cost - 2 * _sw_straight_cost) * mn;
+    return sw.straight_cost * (dx + dy) + (sw.diagonal_cost - 2 * sw.straight_cost) * mn;
 }
 
 static inline int32_t heur_chebyshev(int32_t a, int32_t b) {
     int32_t dx = abs(unpack_x(b) - unpack_x(a));
     int32_t dy = abs(unpack_y(b) - unpack_y(a));
-    return _sw_straight_cost * (dx > dy ? dx : dy);
+    return sw.straight_cost * (dx > dy ? dx : dy);
 }
 
 static inline int32_t ecost(int32_t a, int32_t b) {
     int32_t ax = unpack_x(a), ay = unpack_y(a);
     int32_t bx = unpack_x(b), by = unpack_y(b);
     // bounds check
-    if (ax < 0 || ax >= _sw_width  || ay < 0 || ay >= _sw_height) return _sw_infinity;
-    if (bx < 0 || bx >= _sw_width  || by < 0 || by >= _sw_height) return _sw_infinity;
+    if (ax < 0 || ax >= sw.width  || ay < 0 || ay >= sw.height) return sw.infinity;
+    if (bx < 0 || bx >= sw.width  || by < 0 || by >= sw.height) return sw.infinity;
     // blocked check
-    const uint8_t* bl = (const uint8_t*)_sw_blocked_base;
-    if (bl[ay * _sw_width + ax] || bl[by * _sw_width + bx]) return _sw_infinity;
+    const uint8_t* bl = (const uint8_t*)sw.blocked_base;
+    if (bl[ay * sw.width + ax] || bl[by * sw.width + bx]) return sw.infinity;
     // neighbour check
     int32_t dx = abs(bx - ax);
     int32_t dy = abs(by - ay);
     bool straight = (dx + dy) == 1;
     bool diagonal = (dx == 1) && (dy == 1);
-    if (_sw_connectivity == CONNECTIVITY_FOUR && !straight) return _sw_infinity;
-    if (!straight && !diagonal) return _sw_infinity;
+    if (sw.connectivity == CONNECTIVITY_FOUR && !straight) return sw.infinity;
+    if (!straight && !diagonal) return sw.infinity;
     // diagonal move allowed check
     if (diagonal) {
-        if (bl[by * _sw_width + ax] || bl[ay * _sw_width + bx]) return _sw_infinity;
-        return _sw_diagonal_cost;
+        if (bl[by * sw.width + ax] || bl[ay * sw.width + bx]) return sw.infinity;
+        return sw.diagonal_cost;
     }
-    return _sw_straight_cost;
+    return sw.straight_cost;
 }
 
 static inline void kcalc(int32_t packed, int32_t* k1_out, int32_t* k2_out) {
     int32_t g   = gcost(packed);
     int32_t rhs = rcost(packed);
     int32_t k2  = g < rhs ? g : rhs;
-    int32_t sx  = unpack_x(_sw_start);
-    int32_t sy  = unpack_y(_sw_start);
+    int32_t sx  = unpack_x(sw.start);
+    int32_t sy  = unpack_y(sw.start);
     int32_t sp  = pack_state(sx, sy);
     int32_t h;
-    switch (_sw_heuristic_type) {
+    switch (sw.heuristic_type) {
         case HEURISTIC_OCTILE:    h = heur_octile(sp, packed);    break;
         case HEURISTIC_CHEBYSHEV: h = heur_chebyshev(sp, packed); break;
-        default:                  h = heur_manhattan(sp, packed);  break;
+        case HEURISTIC_MANHATTAN: h = heur_manhattan(sp, packed); break;
+        default:                  h = heur_octile(sp, packed);  break;
     }
-    *k1_out = k2 + h + _sw_km;
+    *k1_out = k2 + h + sw.km;
     *k2_out = k2;
 }
 
