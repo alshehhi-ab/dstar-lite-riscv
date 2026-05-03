@@ -13,7 +13,9 @@
 // limitations under the License.
 
 #include <cstdlib>
+
 #include "dstar_lite.h"
+#include "isa_extensions.h"
 
 // Constructor
 
@@ -22,7 +24,24 @@ DStarLite::DStarLite(const GridMap &grid, const HeuristicType heuristic_type) :
     heuristic_type(heuristic_type){
         state_values.resize(grid.getWidth() * grid.getHeight());
         in_open.assign(grid.getWidth() * grid.getHeight(), 0);  // added for lazy-deletion
-    }
+
+#ifdef DSTAR_USE_HW_ISA
+        dstar_csr_init(
+            state_values.data(),
+            nullptr, // blocked_base — added when ECOST is implemented
+            grid.getWidth(),
+            grid.getHeight(),
+            s_start.x,          s_start.y,
+            s_goal.x,           s_goal.y,
+            km,
+            kInfinity,
+            kStraightCost,
+            kDiagonalCost,
+            static_cast<int32_t>(heuristic_type),
+            static_cast<int32_t>(grid.getConnectivity())
+        );
+#endif
+}
 
 // Public setters and getters for basic D* Lite utility.
 State DStarLite::getStart() const {
@@ -59,7 +78,11 @@ void DStarLite::setG(const State &state, int32_t g)
     }
 
     // Otherwise set g.
+#ifdef DSTAR_USE_HW_ISA
+    gset(pack_state(state.x, state.y), g);
+#else
     state_values[toIndex(state)].g = g;
+#endif
 }
 
 void DStarLite::setRhs(const State &state, int32_t rhs) {
@@ -70,7 +93,11 @@ void DStarLite::setRhs(const State &state, int32_t rhs) {
     }
     
     // Otherwise set rhs.
+#ifdef DSTAR_USE_HW_ISA
+    rset(pack_state(state.x, state.y), rhs);
+#else
     state_values[toIndex(state)].rhs = rhs;
+#endif
 }
 
 int32_t DStarLite::getG(const State &state) const {
@@ -79,9 +106,13 @@ int32_t DStarLite::getG(const State &state) const {
     if (!grid.isValid(state)) {
         return kInfinity;
     }
-    
-    // otherwise
+
+    // Otherwise
+#ifdef DSTAR_USE_HW_ISA
+    return gcost(pack_state(state.x, state.y));
+#else
     return state_values[toIndex(state)].g;
+#endif
 }
 
 int32_t DStarLite::getRhs(const State &state) const {
@@ -92,7 +123,11 @@ int32_t DStarLite::getRhs(const State &state) const {
     }
 
     // Otherwise
+#ifdef DSTAR_USE_HW_ISA
+    return rcost(pack_state(state.x, state.y));
+#else
     return state_values[toIndex(state)].rhs;
+#endif
 }
 
 // Heuristic functions
@@ -107,7 +142,18 @@ HeuristicType DStarLite::getHeuristicType() const {
 }
 
 int32_t DStarLite::heuristic(const State &state_a, const State &state_b) const {
-    
+
+#ifdef DSTAR_USE_HW_ISA
+    int32_t a = pack_state(state_a.x, state_a.y);
+    int32_t b = pack_state(state_b.x, state_b.y);
+    switch (heuristic_type) {
+        case HeuristicType::kOctile:    return heur_octile(a, b);
+        case HeuristicType::kChebyshev: return heur_chebyshev(a, b);
+        case HeuristicType::kManhattan: return heur_manhattan(a, b);
+        default:                        return heur_manhattan(a, b);
+    }
+
+#else    
     // First define dx, dy
     const int32_t dx = std::abs(state_b.x - state_a.x);
     const int32_t dy = std::abs(state_b.y - state_a.y);
@@ -133,6 +179,8 @@ int32_t DStarLite::heuristic(const State &state_a, const State &state_b) const {
         default:
             return (kStraightCost * (dx + dy));
     }
+
+#endif
 }
 
 // PQ Operations
@@ -173,9 +221,12 @@ void DStarLite::remove(const State &state) {
 // D* Lite core procedures
 
 Key DStarLite::calculateKey(const State &state) const {
-    
-    // K1, K2
 
+#ifdef DSTAR_USE_HW_ISA
+    int32_t k1, k2;
+    kcalc(pack_state(state.x, state.y), &k1, &k2);
+    return Key{k1, k2};
+#else
     const int32_t g_val = getG(state);
     const int32_t rhs_val = getRhs(state);
     
@@ -186,11 +237,10 @@ Key DStarLite::calculateKey(const State &state) const {
     int32_t k1_val = k2_val + heuristic(s_start, state) + km;
 
     return Key{k1_val, k2_val};
+#endif
 }
 
 void DStarLite::initialize(){
-    //TODO
-
     // Clear the OPEN PQ (U = empty)
     while (!open.empty()){
         open.pop();
@@ -198,7 +248,11 @@ void DStarLite::initialize(){
 
     // Set km = 0
     km = 0;
-    
+
+#ifdef DSTAR_USE_HW_ISA
+    dstar_csr_set_km(km);
+#endif
+
     path.clear();
 
     // set all rhs, g, of all states = infinity
@@ -218,8 +272,7 @@ void DStarLite::initialize(){
 }
 
 void DStarLite::updateVertex(const State& state) {
-    //TODO
-
+    
     // [1] If (u != s_goal), rhs(u) = min_(s' in succ(u)) (c(u,s') + g(s'))
     
     int32_t min_rhs = kInfinity;
@@ -465,6 +518,11 @@ void DStarLite::updateStart(const State &new_start) {
 
     s_last = new_start;
     s_start = new_start;
+
+#ifdef DSTAR_USE_HW_ISA
+    dstar_csr_set_km(km);
+    dstar_csr_set_start(s_start.x, s_start.y);
+#endif
 
     path.clear();
 }

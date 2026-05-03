@@ -584,7 +584,7 @@ static inline void kcalc(int32_t packed, int32_t* k1_out, int32_t* k2_out) {
         case HEURISTIC_OCTILE:    h = heur_octile(sp, packed);    break;
         case HEURISTIC_CHEBYSHEV: h = heur_chebyshev(sp, packed); break;
         case HEURISTIC_MANHATTAN: h = heur_manhattan(sp, packed); break;
-        default:                  h = heur_octile(sp, packed);  break;
+        default:                  h = heur_manhattan(sp, packed);  break;
     }
     *k1_out = k2 + h + sw.km;
     *k2_out = k2;
