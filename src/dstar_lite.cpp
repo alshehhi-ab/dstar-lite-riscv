@@ -21,7 +21,7 @@ DStarLite::DStarLite(const GridMap &grid, const HeuristicType heuristic_type) :
     grid(grid),
     heuristic_type(heuristic_type){
         state_values.resize(grid.getWidth() * grid.getHeight());
-        in_open.assign(grid.getWidth() * grid.getHeight(), false);  // added for lazy-deletion
+        in_open.assign(grid.getWidth() * grid.getHeight(), 0);  // added for lazy-deletion
     }
 
 // Public setters and getters for basic D* Lite utility.
@@ -144,7 +144,7 @@ void DStarLite::insert(const State &state) {
     }
 
     // insert a state with a key into the OPEN PQ
-    in_open[toIndex(state)] = true; // Lazy-deletion tracking list
+    in_open[toIndex(state)] = 1; // Lazy-deletion tracking list
     open.push(PQNode{state, calculateKey(state)});
 }
 
@@ -154,7 +154,7 @@ void DStarLite::insert(const State &state, const Key &key) {
         return;
     }
     
-    in_open[toIndex(state)] = true; // Lazy-deletion tracking list
+    in_open[toIndex(state)] = 1; // Lazy-deletion tracking list
     open.push(PQNode{state, key});
 }
 
@@ -165,7 +165,7 @@ void DStarLite::remove(const State &state) {
     // Lazy-deletion version:
 
     if (!grid.isValid(state)) return;
-    in_open[toIndex(state)] = false;
+    in_open[toIndex(state)] = 0;
 
 }
 
@@ -208,7 +208,7 @@ void DStarLite::initialize(){
     }
 
     // Reset OPEN membership trackers. (lazy-deletion fix)
-    std::fill(in_open.begin(), in_open.end(), false);
+    std::fill(in_open.begin(), in_open.end(), 0);
 
     // Set rhs of s_goal = 0
     setRhs(s_goal, 0);
@@ -278,7 +278,7 @@ void DStarLite::computeShortestPath() {
             continue;
         }
 
-        in_open[toIndex(u)] = false;
+        in_open[toIndex(u)] = 0;
 
         
         const Key key_old = node_u.key;
